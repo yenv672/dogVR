@@ -12,10 +12,9 @@ public class stateMachine : MonoBehaviour {
    public GameState CurrentGamestates;
     float lastStateChage = 0.0f;
     [SerializeField]
-    private Transform Frame, Box, HomeRubbishBin, Dogbowl,Napkin;
-
-	public GameObject stageLoadEnable;
-    public bool IsFrameChecked, IsBoxChecked,IsRubbishBinChecked,IsBowlChecked,IsNapkinChecked;
+    private Transform Frame, DogBed, Box, HomeRubbishBin, Dogbowl,Napkin;
+	public GameObject stageFourLoadEnable;
+	public bool IsFrameChecked, IsBoxChecked,IsRubbishBinChecked,IsBowlChecked,IsNapkinChecked;
 
     // Use this for initialization
     void Start () {
@@ -53,7 +52,7 @@ public class stateMachine : MonoBehaviour {
                 SetCurrentState(GameState.Stage01);  //go to stage 01;
                 break;
             case GameState.Stage01:
-                if (IsFrameChecked && IsBoxChecked) {
+                if (IsFrameChecked ) {
                     SetCurrentState(GameState.OnStage01End);//go to stage01 end
                 }              
                 Debug.Log("Stage01");
@@ -70,7 +69,7 @@ public class stateMachine : MonoBehaviour {
                 break;
             case GameState.Stage02:
                 Debug.Log("Stage02");
-                if (IsRubbishBinChecked && IsBowlChecked) {
+			if (IsRubbishBinChecked && IsBowlChecked && IsBoxChecked) {
                     SetCurrentState(GameState.OnStage02End);
                 }
                 break;
@@ -104,7 +103,6 @@ public class stateMachine : MonoBehaviour {
         }
     }
     void InitializeGame() {
-        Box.tag = "Interactable";
 		Frame.tag = "Interactable";
         Frame.GetComponent<ObjectInteractions>().ColorHorver();
         Napkin.gameObject.SetActive(false);
@@ -112,7 +110,6 @@ public class stateMachine : MonoBehaviour {
 
     void EndStage01() {
         IsFrameChecked =IsBoxChecked=IsRubbishBinChecked=IsBowlChecked = IsNapkinChecked = false;
-        Box.gameObject.tag = "Untagged";
         Frame.gameObject.tag = "Untagged";
         Box.GetComponent<ObjectInteractions>().DisableColorHorver();
         Frame.GetComponent<ObjectInteractions>().DisableColorHorver();
@@ -120,7 +117,11 @@ public class stateMachine : MonoBehaviour {
 
     void InitializationsStage02() {
         IsFrameChecked = IsBoxChecked = IsRubbishBinChecked = IsBowlChecked= IsNapkinChecked = false;
-        HomeRubbishBin.tag = "Interactable";
+		DogBed.gameObject.SetActive (false);
+		Box.GetComponent<Renderer> ().enabled = true;
+		Box.gameObject.tag = "Interactable";
+		Box.GetComponent<ObjectInteractions>().ColorHorver();
+		HomeRubbishBin.tag = "Interactable";
         HomeRubbishBin.GetComponent<ObjectInteractions>().ColorHorver();
         Dogbowl.tag = "Interactable";
         Dogbowl.GetComponent<ObjectInteractions>().ColorHorver();
@@ -148,6 +149,6 @@ public class stateMachine : MonoBehaviour {
 
 	void InitializationStage04() {
 		IsFrameChecked = IsBoxChecked = IsRubbishBinChecked = IsBowlChecked= IsNapkinChecked = false;
-		stageLoadEnable.SetActive (true);
+		stageFourLoadEnable.SetActive (true);
 	}
 }

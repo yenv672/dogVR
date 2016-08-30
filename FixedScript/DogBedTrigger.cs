@@ -11,7 +11,6 @@ public class DogBedTrigger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
     void OnTriggerExit()

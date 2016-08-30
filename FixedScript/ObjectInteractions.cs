@@ -46,6 +46,7 @@ public class ObjectInteractions : MonoBehaviour {
         StateMachine.IsBoxChecked = true;
         this.gameObject.tag = "Untagged";
     }
+		
 
     public void FrameChecked() {
         Debug.Log("FrameCheck");

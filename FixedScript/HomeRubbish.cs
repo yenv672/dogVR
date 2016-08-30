@@ -29,7 +29,7 @@ public class HomeRubbish : MonoBehaviour {
             {
                 if (lookingcheck)
                 {
-                        Debug.LogWarning("Show Street Grabage");
+                    Debug.LogWarning("Show Street Grabage");
                     this.GetComponent<ObjectInteractions>().RubbishBinChecked();
                     this.GetComponent<ObjectInteractions>().DisableColorHorver();
                     gameObject.GetComponentInChildren<Renderer>().enabled = false;
