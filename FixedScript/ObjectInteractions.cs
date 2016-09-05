@@ -23,6 +23,8 @@ public class ObjectInteractions : MonoBehaviour {
 	
 	}
 
+  
+
     //HideTheDogBed Show DogBox is in the DogBedTrigger Script
     public void HideDogBed() {
         this.GetComponent<Collider>().enabled = false;
@@ -33,18 +35,21 @@ public class ObjectInteractions : MonoBehaviour {
         Debug.Log("DogBowlChecked");
         StateMachine.IsBowlChecked = true;
         this.gameObject.tag = "Untagged";
+        StateMachine.StateCheck();
     }
 
     public void RubbishBinChecked() {
         Debug.Log("RubbishBinChecked");
         StateMachine.IsRubbishBinChecked = true;
         this.gameObject.tag = "Untagged";
+        StateMachine.StateCheck();
     }
 
     public void BoxChecked() {
         Debug.Log("boxChecked");
         StateMachine.IsBoxChecked = true;
         this.gameObject.tag = "Untagged";
+        StateMachine.StateCheck();
     }
 		
 
@@ -60,7 +65,7 @@ public class ObjectInteractions : MonoBehaviour {
             this.gameObject.tag = "Untagged";
             this.GetComponent<Rigidbody>().useGravity = true;
         }
-
+        StateMachine.StateCheck();
     }
 
 

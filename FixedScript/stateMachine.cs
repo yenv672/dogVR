@@ -38,7 +38,7 @@ public class stateMachine : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-        StateCheck();
+        //StateCheck();
     }
 
     public void  StateCheck() {
@@ -50,10 +50,12 @@ public class stateMachine : MonoBehaviour {
                 //Initialization game()
                 InitializeGame();
                 SetCurrentState(GameState.Stage01);  //go to stage 01;
+                StateCheck();
                 break;
             case GameState.Stage01:
                 if (IsFrameChecked ) {
                     SetCurrentState(GameState.OnStage01End);//go to stage01 end
+                    StateCheck();
                 }              
                 Debug.Log("Stage01");
                 break;
@@ -61,31 +63,37 @@ public class stateMachine : MonoBehaviour {
                 EndStage01();
                 SetCurrentState(GameState.Stage02Initialization);//go to stage 02;
                 Debug.Log("OnStage01End");
+                StateCheck();
                 break;
             case GameState.Stage02Initialization:
                 InitializationsStage02();
                 Debug.Log("Stage02Initialization");
                 SetCurrentState(GameState.Stage02);//go to stage 02;
+                StateCheck();
                 break;
             case GameState.Stage02:
                 Debug.Log("Stage02");
 			if (IsRubbishBinChecked && IsBowlChecked && IsBoxChecked) {
                     SetCurrentState(GameState.OnStage02End);
+                    StateCheck();
                 }
                 break;
             case GameState.OnStage02End:
                 EndStage02();
                 Debug.Log("OnStage02End");
                 SetCurrentState(GameState.Stage03Initialization);//go to stage 03;
+                StateCheck();
                 break;
             case GameState.Stage03Initialization://START STAGE 03;
                 InitializationStage03();
                 Debug.Log("Stage03Initialization");
                 SetCurrentState(GameState.Stage03);
+                StateCheck();
                 break;
             case GameState.Stage03:
                 if (IsFrameChecked) {
                     SetCurrentState(GameState.OnStage03End);//END THE STAGE 03
+                    StateCheck();
                 }
                 Debug.Log("Stage03");
                 break;
@@ -93,6 +101,7 @@ public class stateMachine : MonoBehaviour {
                 EndStage03();
                 Debug.Log("OnStage04End");
 				SetCurrentState(GameState.Stage04Initialization);//go to stage 04;
+                StateCheck();
                 break;
 			case GameState.Stage04Initialization:
 				InitializationStage04 ();
@@ -129,7 +138,9 @@ public class stateMachine : MonoBehaviour {
 
     void EndStage02() {
         IsFrameChecked = IsBoxChecked = IsRubbishBinChecked = IsBowlChecked = IsNapkinChecked = false;
-        HomeRubbishBin.tag = "Untagged";
+		Box.tag = "Untagged";
+		Box.GetComponent<ObjectInteractions>().DisableColorHorver();
+		HomeRubbishBin.tag = "Untagged";
         HomeRubbishBin.GetComponent<ObjectInteractions>().DisableColorHorver();
         Dogbowl.tag = "Untagged";
         Dogbowl.GetComponent<ObjectInteractions>().DisableColorHorver();
